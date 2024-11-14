@@ -1,10 +1,12 @@
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import './App.css';
+import HomeView from './views/HomeView';
 
 function App() {
   return (
-    <div className="App">
-      project 3355
-    </div>
+    <Routes>
+      <Route path='/' element={<HomeView />} />
+    </Routes>
   );
 }
 
