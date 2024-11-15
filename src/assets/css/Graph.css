@@ -1,0 +1,92 @@
+/* Graph.css */
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 100vh;
+    padding: 24px;
+    background: white;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+}
+
+/* 불량률 섹션 */
+.defect-rate {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.defect-rate h2 {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+/* 그래프 섹션 */
+.graphs-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.graph-item {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    width: 100%;
+    height: 100px;
+}
+
+.graph-title {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* 스크롤바 스타일링 */
+.graph-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.graph-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.graph-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.graph-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 반응형 조정 */
+@media (max-height: 800px) {
+    .graph-container {
+        padding: 16px;
+    }
+
+    .graphs-section {
+        gap: 16px;
+    }
+
+    .graph-item {
+        padding: 12px;
+    }
+
+    .chart-container {
+        height: 180px;
+    }
+}
