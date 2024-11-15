@@ -2,7 +2,7 @@ import React from "react"
 
 const Settings = () => {
     return (
-        <div>main</div>
+        <div>Setting</div>
     )
 }
 

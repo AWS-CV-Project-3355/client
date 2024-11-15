@@ -5,8 +5,7 @@ import Upload from './components/Upload';
 import Graph from './components/Graph';
 import Help from './components/Help';
 import Settings from './components/Settings';
-import Detect from './components/Detect';
-import NGList from './components/NGList';
+import Main from './components/Main';
 
 function App() {
   return (
@@ -16,8 +15,7 @@ function App() {
           <>
             <Upload />
             <div className="main-content">
-              <Detect />
-              <NGList />
+              <Main />
             </div>
           </>
         } />
@@ -25,12 +23,19 @@ function App() {
           <>
             <Graph />
             <div className="main-content">
-              <Detect />
-              <NGList />
+              <Main />
             </div>
           </>
         } />
-        <Route path="help" element={<Help />} />
+        <Route path="help" element={
+          <>
+            <Help />
+            <div className="main-content">
+              <Main />
+            </div>
+
+          </>
+        } />
         <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>
