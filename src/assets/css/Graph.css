@@ -11,15 +11,7 @@
 }
 
 /* 불량률 섹션 */
-.defect-rate {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 24px;
-}
-
-.defect-rate h2 {
+.h2 {
     margin: 0;
     font-size: 16px;
     color: #666;
@@ -30,7 +22,7 @@
 .graphs-section {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 }
 
 .graph-item {
@@ -42,12 +34,12 @@
 
 .chart-container {
     width: 100%;
-    height: 100px;
+    height: 70px;
 }
 
 .graph-title {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 8px;
     font-size: 14px;
     color: #666;
     font-weight: 500;
