@@ -1,0 +1,144 @@
+/* Upload.css */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 320px;
+    height: 100vh;
+    padding: 24px;
+    background: white;
+    border-right: 1px solid #e0e0e0;
+}
+
+/* Preview Section */
+.preview-section {
+    text-align: center;
+}
+
+.preview-box {
+    width: 100%;
+    height: 240px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.preview-text {
+    margin-top: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Upload Button Section */
+.upload-section {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+    background-color: #1557b0;
+}
+
+/* History Section */
+.history-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.history-section h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.history-item:hover {
+    background-color: #f5f5f5;
+}
+
+.history-item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.history-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.history-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-item-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.history-item-date {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Scrollbar Styling */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
