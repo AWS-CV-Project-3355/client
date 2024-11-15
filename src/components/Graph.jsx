@@ -1,4 +1,3 @@
-// components/Graph.jsx
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import '../assets/css/Graph.css';
@@ -38,18 +37,18 @@ const Graph = () => {
             },
             xAxis: {
                 type: 'value',
-                name: 'Time(s)',
-                nameLocation: 'middle',
-                nameGap: 25,
+                // name: 'Time(s)',
+                // nameLocation: 'middle',
+                // nameGap: 25,
                 splitLine: {
                     show: false
                 }
             },
             yAxis: {
                 type: 'value',
-                name: 'Value',
-                nameLocation: 'middle',
-                nameGap: 40
+                // name: 'Value',
+                // nameLocation: 'middle',
+                // nameGap: 40
             },
             series: [{
                 data: data,
@@ -104,10 +103,7 @@ const Graph = () => {
 
     return (
         <div className="graph-container">
-            {/* 불량률 섹션 */}
-            <div className="defect-rate">
-                <h2>불량률</h2>
-            </div>
+            <h2>불량률</h2>
 
             {/* 그래프들 */}
             <div className="graphs-section">
