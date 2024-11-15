@@ -24,20 +24,10 @@ const Upload = () => {
 
     return (
         <div className="upload-container">
-            {/* 사진 미리보기 영역 */}
-            <div className="preview-section">
-                <div className="preview-box">
-                    <img
-                        src="/api/placeholder/400/300"
-                        alt="preview"
-                        className="preview-image"
-                    />
-                </div>
-                <p className="preview-text">Input Photo</p>
-            </div>
+            <p className="preview-text">Input Photo</p>
 
             {/* 업로드 버튼 영역 */}
-            <div className="upload-section">
+            <div className="button-section">
                 <label className="upload-button" htmlFor="file-upload">
                     <UploadIcon size={24} />
                     <span>사진 업로드</span>
@@ -49,6 +39,9 @@ const Upload = () => {
                         style={{ display: 'none' }}
                     />
                 </label>
+                <label className='enroll-button' htmlFor='file-enroll'>
+                    <span>등록</span>
+                </label>
             </div>
 
             {/* 업로드 기록 영역 */}
@@ -57,9 +50,11 @@ const Upload = () => {
                 <div className="history-list">
                     {uploadHistory.map((item) => (
                         <div key={item.id} className="history-item">
-                            <div className="history-item-icon">
-                                <img src="/api/placeholder/48/48" alt="thumbnail" />
-                            </div>
+                            <label>
+                                <input
+                                    type='checkbox'
+                                />
+                            </label>
                             <div className="history-item-info">
                                 <span className="history-item-name">{item.name}</span>
                                 <span className="history-item-date">{item.date}</span>
