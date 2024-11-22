@@ -15,7 +15,7 @@ function App() {
           <>
             <Upload />
             <div className="main-content">
-              <Main />
+              {/* <Main /> */}
             </div>
           </>
         } />
@@ -23,7 +23,7 @@ function App() {
           <>
             <Graph />
             <div className="main-content">
-              <Main />
+              {/* <Main /> */}
             </div>
           </>
         } />
@@ -31,7 +31,7 @@ function App() {
           <>
             <Help />
             <div className="main-content">
-              <Main />
+              {/* <Main /> */}
             </div>
 
           </>
