@@ -10,7 +10,7 @@ const NGDetail = ({ item, onBack }) => {
         <div className="ng-detail">
             <button className="back-button" onClick={onBack}>Back</button>
             <h2>NG Detail</h2>
-            <div className="ng-images">
+            <div className="ng-images-list">
                 <img src={item.image} alt="NG 부품 사진" className="ng-image" />
                 <img src={item.cropimage} alt="결함 위치 Crop" className="ng-cropimage" />
             </div>
