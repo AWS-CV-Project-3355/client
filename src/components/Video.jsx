@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Detect } from './Detect';
-import '../assets/css/Main.css';
-import NGDetail from './NGDetail';
-import test_img from '../assets/img/test_img.png';
+import '../assets/css/Video.css';
+import Camera from './Camera';
 
-const Main = ({ selectedItem, onBackToList }) => {
+const Video = () => {
     const [uploadedVideo, setUploadedVideo] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const handleVideoUploaded = (e) => {
         const file = e.target.files[0];
@@ -20,26 +19,27 @@ const Main = ({ selectedItem, onBackToList }) => {
     return (
         <div className="main-container">
             {selectedItem ? (
-                <NGDetail item={selectedItem} onBack={onBackToList} />
+                <Camera
+                    selectedItem={selectedItem}
+                    onBackToList={() => setSelectedItem(null)}
+                />
             ) : (
-                <div className='detect-container'>
+                <div className='video-container'>
                     {uploadedVideo ? (
-                        <Detect src={uploadedVideo.src} />
+                        <video className="video" controls>
+                            <source src={uploadedVideo.src} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     ) : (
                         <div className="video-placeholder">
                             <p>Upload a video to display it here</p>
                             <input type="file" accept="video/*" onChange={handleVideoUploaded} />
                         </div>
                     )}
-                    <img src={test_img} alt='' className='left-up' />
-                    <img src={test_img} alt='' className='left-down' />
-                    <img src={test_img} alt='' className='right-up' />
-                    <img src={test_img} alt='' className='right-down' />
-                    <img src={test_img} alt='' className='frontal' />
                 </div>
             )}
         </div>
     );
 };
 
-export default Main;
+export default Video;
