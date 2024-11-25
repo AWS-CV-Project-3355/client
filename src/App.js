@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout';
-import Upload from './components/Upload';
+import History from './components/History';
 import Graph from './components/Graph';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="upload" element={
           <>
-            <Upload />
+            <History />
           </>
         } />
         <Route path="graph" element={
