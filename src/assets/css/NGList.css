@@ -9,6 +9,8 @@
 }
 
 .ng-item {
+
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,4 +48,22 @@
     color: #7f8c8d;
     display: inline-block;
     white-space: nowrap;
+}
+
+.overlay {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 검정색 50% 투명도 */
+    z-index: -1;
+    /* 이미지보다 뒤에 배치 */
 }

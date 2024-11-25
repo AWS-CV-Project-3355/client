@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import NavigationRail from './NavigationRail';
 import '../assets/css/Layout.css';
-import Main from './Main';
+import Video from './Video';
+import Camera from './Camera';
 import NGList from './NGList';
 
 const Layout = () => {
@@ -23,7 +24,17 @@ const Layout = () => {
                 <Outlet />
             </div>
             <div className='main-container'>
-                <Main selectedItem={selectedItem} onBackToList={handleBackToList} />
+                {/* <Video selectedItem={selectedItem} onBackToList={handleBackToList} /> */}
+                {selectedItem ? (
+                    <Camera
+                        selectedItem={selectedItem}
+                        onBackToList={handleBackToList}
+                    />
+                ) : (
+                    <>
+                        <Video />
+                    </>
+                )}
                 <div className="ng-list-container">
                     <NGList onItemClick={handleItemClick} />
                 </div>

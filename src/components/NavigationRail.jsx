@@ -15,9 +15,9 @@ const NavigationRail = () => {
             <img src={logo} alt="Logo" />
             <ul>
                 <li>
-                    <Link to="/upload" className={location.pathname === '/upload' ? 'active' : ''}>
+                    <Link to="/history" className={location.pathname === '/history' ? 'active' : ''}>
                         <VideoIcon />
-                        <span>업로드</span>
+                        <span>기록</span>
                     </Link>
                 </li>
                 <li>
