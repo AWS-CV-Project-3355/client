@@ -1,5 +1,5 @@
 /* Graph.css */
-.graph-container {
+.graphs-container {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -46,27 +46,27 @@
 }
 
 /* 스크롤바 스타일링 */
-.graph-container::-webkit-scrollbar {
+.graphs-container::-webkit-scrollbar {
     width: 6px;
 }
 
-.graph-container::-webkit-scrollbar-track {
+.graphs-container::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 3px;
 }
 
-.graph-container::-webkit-scrollbar-thumb {
+.graphs-container::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 3px;
 }
 
-.graph-container::-webkit-scrollbar-thumb:hover {
+.graphs-container::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
 /* 반응형 조정 */
 @media (max-height: 800px) {
-    .graph-container {
+    .graphs-container {
         padding: 16px;
     }
 

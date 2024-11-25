@@ -102,7 +102,7 @@ const Graph = () => {
     }, []);
 
     return (
-        <div className="graph-container">
+        <div className="graphs-container">
             <h2>불량률</h2>
 
             {/* 그래프들 */}
