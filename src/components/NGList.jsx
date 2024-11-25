@@ -86,7 +86,7 @@ const NGList = ({ onItemClick, selectedItem }) => {
             <div className="ng-list">
                 {filteredData.map((item) => (
                     <div
-                        className={`ng-item ${selectedItem && selectedItem.id !== item.id ? 'overlay' : ''}`}
+                        className={`ng-item ${selectedItem && selectedItem.id === item.id ? 'overlay' : ''}`}
                         key={item.id}
                         onClick={() => onItemClick(item)}  // Call onItemClick to pass selected item to parent
                     >

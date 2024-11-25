@@ -2,51 +2,58 @@ import React, { useState } from 'react';
 import '../assets/css/History.css';
 import testImg from '../assets/img/test_img.png';
 
-const History = ({ onItemClick }) => {
+const History = ({ onItemClick, selectedItem }) => {
     const [uploadHistory, setUploadHistory] = useState([
         {
             id: 1,
             objectName: "20231013-20244012",
             date: "2023-10-13 20:24:12",
             cameras: [
-                {
-                    cameraName: "대각선 왼쪽 위",
-                    image: testImg,
-                    cropImage: testImg,
-                    type: 0,
-                    description: "1뜯김",
-                },
-                {
-                    cameraName: "정면",
-                    image: testImg,
-                    cropImage: null,
-                    type: 1,
-                    description: null,
-                },
-                {
-                    cameraName: "대각선 오른쪽 위",
-                    image: testImg,
-                    cropImage: testImg,
-                    type: 0,
-                    description: "2오염",
-                },
-                {
-                    cameraName: "왼쪽",
-                    image: testImg,
-                    cropImage: testImg,
-                    type: 0,
-                    description: "3파손",
-                },
-                {
-                    cameraName: "오른쪽",
-                    image: testImg,
-                    cropImage: null,
-                    type: 1,
-                    description: null,
-                },
+                { image: testImg, cropImage: testImg, type: 0, description: "1뜯김" },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+            ],
+        },
+        {
+            id: 2,
+            objectName: "20231014-12345678",
+            date: "2023-10-14 12:34:56",
+            cameras: [
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: testImg, type: 0, description: "2오염" },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+            ],
+        },
+        {
+            id: 3,
+            objectName: "20231014-12345678",
+            date: "2023-10-14 12:34:56",
+            cameras: [
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: testImg, type: 0, description: "3오염" },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+            ],
+        },
+        {
+            id: 4,
+            objectName: "20231014-12345678",
+            date: "2023-10-14 12:34:56",
+            cameras: [
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
+                { image: testImg, cropImage: null, type: 1, description: null },
             ],
         },
     ]);
+
 
     const [showNgOnly, setShowNgOnly] = useState(false);
 
@@ -87,7 +94,7 @@ const History = ({ onItemClick }) => {
                     {filteredHistory.map((item) => (
                         <div
                             key={item.id}
-                            className="history-item"
+                            className={`history-item ${selectedItem && selectedItem.id === item.id ? 'overlay' : ''}`}
                             onClick={() => onItemClick(item)} // 수정: item을 그대로 전달
                         >
                             <div className="history-item-info">
@@ -98,8 +105,8 @@ const History = ({ onItemClick }) => {
                             {/* NG/OK 상태 출력 */}
                             <span
                                 className={`history-item-type ${item.cameras.some((camera) => camera.type === 0)
-                                        ? 'ng'
-                                        : 'ok'
+                                    ? 'ng'
+                                    : 'ok'
                                     }`}
                             >
                                 {item.cameras.some((camera) => camera.type === 0)
