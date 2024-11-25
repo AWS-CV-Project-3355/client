@@ -36,7 +36,7 @@ const Layout = () => {
                     </>
                 )}
                 <div className="ng-list-container">
-                    <NGList onItemClick={handleItemClick} />
+                    <NGList onItemClick={handleItemClick} selectedItem={selectedItem} />
                 </div>
             </div>
         </div>
