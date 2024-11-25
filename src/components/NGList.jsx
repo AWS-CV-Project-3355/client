@@ -12,7 +12,7 @@ const cameraNames = [
 ];
 
 // NGList 컴포넌트
-const NGList = ({ onItemClick }) => {
+const NGList = ({ onItemClick, selectedItem }) => {
     const data = [
         {
             id: 1,
@@ -86,7 +86,7 @@ const NGList = ({ onItemClick }) => {
             <div className="ng-list">
                 {filteredData.map((item) => (
                     <div
-                        className="ng-item"
+                        className={`ng-item ${selectedItem && selectedItem.id === item.id ? 'overlay' : ''}`}
                         key={item.id}
                         onClick={() => onItemClick(item)}  // Call onItemClick to pass selected item to parent
                     >

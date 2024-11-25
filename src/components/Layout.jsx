@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import NavigationRail from './NavigationRail';
 import '../assets/css/Layout.css';
 import Video from './Video';
 import Camera from './Camera';
 import NGList from './NGList';
 
-const Layout = () => {
-    const location = useLocation();
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-    };
-    const handleBackToList = () => {
-        setSelectedItem(null);
-    };
+const Layout = ({ selectedItem, onItemClick, onBackToList }) => {
 
     return (
         <div className="layout">
@@ -24,19 +15,16 @@ const Layout = () => {
                 <Outlet />
             </div>
             <div className='main-container'>
-                {/* <Video selectedItem={selectedItem} onBackToList={handleBackToList} /> */}
                 {selectedItem ? (
                     <Camera
                         selectedItem={selectedItem}
-                        onBackToList={handleBackToList}
+                        onBackToList={onBackToList}
                     />
                 ) : (
-                    <>
-                        <Video />
-                    </>
+                    <Video />
                 )}
                 <div className="ng-list-container">
-                    <NGList onItemClick={handleItemClick} />
+                    <NGList onItemClick={onItemClick} selectedItem={selectedItem} />
                 </div>
             </div>
         </div>
