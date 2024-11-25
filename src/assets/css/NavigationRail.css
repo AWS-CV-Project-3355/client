@@ -35,8 +35,8 @@
 }
 
 .navigation-rail a.active {
-    color: #1a73e8;
-    background-color: #e8f0fe;
+    color: #e8f0fe;
+    background-color: #666;
 }
 
 .navigation-rail a svg {
@@ -47,4 +47,21 @@
 
 .navigation-rail a span {
     font-size: 12px;
+}
+
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 92%;
+    padding: 8px 8px;
+}
+
+.graph-container>div {
+    width: 100%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #666;
 }
