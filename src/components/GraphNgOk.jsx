@@ -47,8 +47,8 @@ const GraphNgOk = () => {
                     itemStyle: {
                         color: function (params) {
                             return params.dataIndex === 0
-                                ? 'rgba(255, 99, 132, 0.6)'
-                                : 'rgba(75, 192, 192, 0.6)';
+                                ? 'red'
+                                : 'green';
                         },
                     },
                     label: {
