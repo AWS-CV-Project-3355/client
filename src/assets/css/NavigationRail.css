@@ -20,6 +20,10 @@
     width: 100%;
 }
 
+.navigation-rail li {
+    padding: 4px;
+}
+
 .navigation-rail a {
     display: flex;
     flex-direction: row;
@@ -28,6 +32,7 @@
     color: #666;
     text-decoration: none;
     transition: all 0.2s;
+    border-radius: 4px;
 }
 
 .navigation-rail a:hover {
@@ -35,8 +40,9 @@
 }
 
 .navigation-rail a.active {
-    color: #e8f0fe;
-    background-color: #666;
+    /* color: #e8f0fe; */
+    font-weight: 700;
+    background-color: #c7c7c7;
 }
 
 .navigation-rail a svg {
@@ -46,7 +52,7 @@
 }
 
 .navigation-rail a span {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 

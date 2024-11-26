@@ -28,3 +28,14 @@
     color: #666;
     font-size: 18px;
 }
+
+.video {
+    width: 100%;
+    /* 화면 가로에 맞추기 */
+    height: auto;
+    /* 비율 유지 */
+    max-height: 100%;
+    /* 세로가 넘치지 않도록 제한 */
+    object-fit: contain;
+    /* 비율을 유지하며 공간에 맞춤 */
+}
