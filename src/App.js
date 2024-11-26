@@ -11,6 +11,7 @@ function App() {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
+    localStorage.removeItem('uploadedVideo');
   };
 
   const handleBackToList = () => {
