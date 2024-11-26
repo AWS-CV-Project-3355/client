@@ -4,6 +4,14 @@ import * as echarts from 'echarts';
 const GraphNgTypes = () => {
     const chartRef = useRef(null);
 
+    // 각 라벨에 대한 색상 정의
+    const labelColors = {
+        '뜯김': '#ffd6d6',
+        '미성형': '#ffb1b1',
+        '찍힘': '#ff9292',
+        '유로홀버': '#ff6c6c'
+    };
+
     useEffect(() => {
         const chart = echarts.init(chartRef.current);
 
@@ -22,10 +30,10 @@ const GraphNgTypes = () => {
                 },
             },
             grid: {
-                left: '10%',
+                left: '0%',
                 right: '10%',
-                top: '15%',
-                bottom: '10%',
+                top: '20%',
+                bottom: '0%',
                 containLabel: true,
             },
             xAxis: {
@@ -46,9 +54,10 @@ const GraphNgTypes = () => {
                 {
                     type: 'bar',
                     data: [152, 210, 120, 59],
-                    barWidth: '40%', // 막대 너비
+                    barWidth: '60%', // 막대 너비
                     itemStyle: {
-                        color: '#1f78b4',
+                        // 각 x축 라벨에 맞는 색상 설정
+                        color: (params) => labelColors[params.name],
                     },
                     label: {
                         show: true, // 숫자를 표시
@@ -59,9 +68,7 @@ const GraphNgTypes = () => {
                         color: '#333', // 글자 색상
                     },
                 },
-
             ],
-
         };
 
         chart.setOption(options);
@@ -72,7 +79,7 @@ const GraphNgTypes = () => {
     }, []);
 
     return (
-        <div style={{ width: '100%', height: '200px', margin: '0 0' }}>
+        <div style={{ width: '100%', height: '180px', margin: '4px 4px' }}>
             <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
         </div>
     );

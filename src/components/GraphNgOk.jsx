@@ -25,6 +25,9 @@ const GraphNgOk = () => {
                 },
             },
             grid: {
+                top: '20%',
+                left: '0%',
+                bottom: '0%',
                 containLabel: true,
             },
             xAxis: {
@@ -73,8 +76,8 @@ const GraphNgOk = () => {
     }, []);
 
     return (
-        <div style={{ width: '100%', height: '220px', margin: '0 0' }}>
-            <div ref={chartRef} style={{ width: '100%', height: '120%' }}></div>
+        <div style={{ width: '100%', height: '200px', margin: '4px 4px' }}>
+            <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
         </div>
     );
 };

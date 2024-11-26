@@ -12,89 +12,103 @@ const Graph = () => {
         chart5: useRef(null),
     };
 
+    // x축 라벨
+    const xLabels = ['뜯김', '미성형', '찍힘', '유로홀버'];
+    const titleTexts = [
+        '오른쪽 대각선 아래',
+        '왼쪽 대각선 아래',
+        '오른쪽 대각선 위',
+        '왼쪽 대각선 위',
+        '정면'
+    ];
+
+    // 각 x축 라벨에 대한 색상 맵
+    const labelColors = {
+        '뜯김': '#ffd6d6',
+        '미성형': '#ffb1b1',
+        '찍힘': '#ff9292',
+        '유로홀버': '#ff6c6c'
+    };
+
     // 샘플 데이터 생성 함수
-    const generateData = (base) => {
-        return Array.from({ length: 100 }, (_, i) => [
-            i,
-            Math.abs(Math.sin(i * 0.1) * base + Math.random() * 5)
-        ]);
+    const generateData = () => {
+        return [52, 21, 12, 5]; // 샘플 데이터
     };
 
     // 차트 옵션 생성 함수
-    const getChartOption = (data) => {
+    const getChartOption = (data, title) => {
         return {
-            grid: {
-                left: '10%',
-                right: '5%',
-                top: '10%',
-                bottom: '15%'
+            title: {
+                text: title, // 각 차트에 개별 제목 설정
+                left: 'center',
+                textStyle: {
+                    fontSize: 16,
+                },
             },
             tooltip: {
                 trigger: 'axis',
-                formatter: function (params) {
-                    return `Time: ${params[0].value[0]}s<br/>Value: ${params[0].value[1].toFixed(2)}`;
-                }
+                axisPointer: {
+                    type: 'shadow',
+                },
+            },
+            grid: {
+                left: '0%',
+                right: '0%',
+                top: '20%',
+                bottom: '0%',
+                containLabel: true,
             },
             xAxis: {
-                type: 'value',
-                // name: 'Time(s)',
-                // nameLocation: 'middle',
-                // nameGap: 25,
-                splitLine: {
-                    show: false
+                type: 'category',
+                data: xLabels, // x축 라벨
+                axisTick: {
+                    alignWithLabel: false,
+                },
+                axisLabel: {
+                    interval: 0,
+                    rotate: 0
                 }
             },
             yAxis: {
                 type: 'value',
-                // name: 'Value',
-                // nameLocation: 'middle',
-                // nameGap: 40
             },
-            series: [{
-                data: data,
-                type: 'line',
-                smooth: true,
-                symbol: 'none',
-                lineStyle: {
-                    width: 2,
-                    color: '#1a73e8'
+            series: [
+                {
+                    type: 'bar',
+                    data: data, // 생성된 데이터
+                    barWidth: '60%', // 막대 너비
+                    itemStyle: {
+                        // 각 라벨에 맞는 색상을 설정
+                        color: (params) => labelColors[xLabels[params.dataIndex]],
+                    },
+                    label: {
+                        show: true, // 막대 위에 숫자 표시
+                        position: 'top', // 숫자 위치
+                        formatter: '{c}', // 데이터 값 표시
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        color: '#333', // 글자 색상
+                    },
                 },
-                areaStyle: {
-                    opacity: 0.1,
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        {
-                            offset: 0,
-                            color: '#1a73e8'
-                        },
-                        {
-                            offset: 1,
-                            color: '#fff'
-                        }
-                    ])
-                }
-            }]
+            ],
         };
     };
 
-    // 차트 초기화 및 렌더링
     useEffect(() => {
         const charts = {};
 
-        // 각 차트 초기화
-        Object.entries(chartRefs).forEach(([key, ref]) => {
+        Object.entries(chartRefs).forEach(([key, ref], index) => {
             if (ref.current) {
                 charts[key] = echarts.init(ref.current);
-                charts[key].setOption(getChartOption(generateData(20 + Math.random() * 20)));
+                charts[key].setOption(getChartOption(generateData(), titleTexts[index]));
             }
         });
 
-        // 반응형 처리
         const handleResize = () => {
             Object.values(charts).forEach(chart => chart.resize());
         };
         window.addEventListener('resize', handleResize);
 
-        // 클린업
         return () => {
             window.removeEventListener('resize', handleResize);
             Object.values(charts).forEach(chart => chart.dispose());
@@ -103,33 +117,28 @@ const Graph = () => {
 
     return (
         <div className="graphs-container">
-            <h2>불량률</h2>
+            <p className='preview-text'>불량률</p>
 
             {/* 그래프들 */}
             <div className="graphs-section">
-                <div className="graph-item">
-                    <div ref={chartRefs.chart1} className="chart-container"></div>
-                    <div className="graph-title">대각선 왼쪽 위</div>
+                <div className="graph-item" style={{ width: '92%', height: '100px' }}>
+                    <div ref={chartRefs.chart1} className="chart-container" style={{ width: '100%', height: '100%' }}></div>
                 </div>
 
-                <div className="graph-item">
-                    <div ref={chartRefs.chart2} className="chart-container"></div>
-                    <div className="graph-title">대각선 오른쪽 위</div>
+                <div className="graph-item" style={{ width: '92%', height: '100px' }}>
+                    <div ref={chartRefs.chart2} className="chart-container" style={{ width: '100%', height: '100%' }}></div>
                 </div>
 
-                <div className="graph-item">
-                    <div ref={chartRefs.chart3} className="chart-container"></div>
-                    <div className="graph-title">대각선 왼쪽 아래</div>
+                <div className="graph-item" style={{ width: '92%', height: '100px' }}>
+                    <div ref={chartRefs.chart3} className="chart-container" style={{ width: '100%', height: '100%' }}></div>
                 </div>
 
-                <div className="graph-item">
-                    <div ref={chartRefs.chart4} className="chart-container"></div>
-                    <div className="graph-title">대각선 오른쪽 아래</div>
+                <div className="graph-item" style={{ width: '92%', height: '100px' }}>
+                    <div ref={chartRefs.chart4} className="chart-container" style={{ width: '100%', height: '100%' }}></div>
                 </div>
 
-                <div className="graph-item">
-                    <div ref={chartRefs.chart5} className="chart-container"></div>
-                    <div className="graph-title">정면</div>
+                <div className="graph-item" style={{ width: '92%', height: '100px' }}>
+                    <div ref={chartRefs.chart5} className="chart-container" style={{ width: '100%', height: '100%' }}></div>
                 </div>
             </div>
         </div>
