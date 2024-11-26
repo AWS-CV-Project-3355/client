@@ -3,19 +3,11 @@
     display: flex;
     flex-direction: column;
     width: 320px;
-    height: 100vh;
+    height: 97vh;
     padding: 24px;
     background: white;
     border-right: 1px solid #e0e0e0;
     overflow-y: auto;
-}
-
-/* 불량률 섹션 */
-.h2 {
-    margin: 0;
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 12px;
 }
 
 /* 그래프 섹션 */
@@ -29,7 +21,7 @@
     background: white;
     padding: 16px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .chart-container {
