@@ -10,7 +10,7 @@ const cameraNames = [
 ];
 
 const Camera = ({ selectedItem, onBackToList }) => {
-    if (!selectedItem) return null;
+    if (!selectedItem) return console.log("item 없음");
 
     return (
         <div className="main-container">
@@ -21,10 +21,13 @@ const Camera = ({ selectedItem, onBackToList }) => {
                 </div>
 
                 {selectedItem.cameras.map((camera, index) => {
+                    if (!camera) return null;
+                    const imageToShow = camera.cropImage || camera.image;
+
                     return (
                         <div key={index} className="camera-view">
                             <img
-                                src={camera.cropImage || camera.image}
+                                src={imageToShow}
                                 alt={`${cameraNames[index]} NG`}
                                 className="camera-image"
                                 style={{
