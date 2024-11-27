@@ -1,9 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import '../assets/css/GraphNgOk.css';
 
 const GraphNgOk = () => {
     const chartRef = useRef(null);
+    const [data, setData] = useState({ diecastOk: 0, diecastNg: 0 }); // 데이터를 저장할 state
+
+    useEffect(() => {
+        // API 호출하여 데이터 받아오기
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://18.205.110.55:8080/diecast/graph/okng');
+                const result = await response.json();
+                setData(result); // 받아온 데이터로 state 업데이트
+            } catch (error) {
+                console.error("데이터를 불러오는 데 실패했습니다:", error);
+            }
+        };
+
+        fetchData();
+    }, []); // 컴포넌트가 처음 렌더링될 때만 호출
 
     useEffect(() => {
         // ECharts 인스턴스 생성
@@ -46,7 +62,7 @@ const GraphNgOk = () => {
             series: [
                 {
                     type: 'bar',
-                    data: [57, 150], // 각각 NG와 OK의 개수
+                    data: [data.diecastNg, data.diecastOk], // 받아온 데이터 사용
                     itemStyle: {
                         color: function (params) {
                             return params.dataIndex === 0
@@ -73,7 +89,7 @@ const GraphNgOk = () => {
         return () => {
             chart.dispose();
         };
-    }, []);
+    }, [data]); // 데이터가 변경될 때마다 차트 갱신
 
     return (
         <div style={{ width: '100%', height: '200px', margin: '4px 4px' }}>
