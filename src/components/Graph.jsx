@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import '../assets/css/Graph.css';
 
@@ -30,9 +30,30 @@ const Graph = () => {
         '유로홀버': '#ff6c6c'
     };
 
-    // 샘플 데이터 생성 함수
-    const generateData = () => {
-        return [52, 21, 12, 5]; // 샘플 데이터
+    // 각 카메라의 불량 유형 데이터를 저장할 상태 변수
+    const [cameraData, setCameraData] = useState({
+        chart1Data: [],
+        chart2Data: [],
+        chart3Data: [],
+        chart4Data: [],
+        chart5Data: []
+    });
+
+    // API 호출 함수
+    const fetchCameraData = async (photoPosition) => {
+        try {
+            const response = await fetch(`http://18.205.110.55:8080/photo/graph/ng/type/${photoPosition}`);
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('카메라 데이터 불러오기 실패:', error);
+            return {
+                photoNgtypeOne: 0,
+                photoNgtypeTwo: 0,
+                photoNgtypeThree: 0,
+                photoNgtypeFour: 0
+            };
+        }
     };
 
     // 차트 옵션 생성 함수
@@ -94,26 +115,48 @@ const Graph = () => {
         };
     };
 
+    // 데이터를 받아와서 각 차트에 반영하는 함수
+    useEffect(() => {
+        const fetchAllData = async () => {
+            const data1 = await fetchCameraData(1);  // 오른쪽 대각선 아래
+            const data2 = await fetchCameraData(2);   // 왼쪽 대각선 아래
+            const data3 = await fetchCameraData(3);    // 오른쪽 대각선 위
+            const data4 = await fetchCameraData(4);     // 왼쪽 대각선 위
+            const data5 = await fetchCameraData(5);       // 정면
+
+            setCameraData({
+                chart1Data: [data1.photoNgtypeOne, data1.photoNgtypeTwo, data1.photoNgtypeThree, data1.photoNgtypeFour],
+                chart2Data: [data2.photoNgtypeOne, data2.photoNgtypeTwo, data2.photoNgtypeThree, data2.photoNgtypeFour],
+                chart3Data: [data3.photoNgtypeOne, data3.photoNgtypeTwo, data3.photoNgtypeThree, data3.photoNgtypeFour],
+                chart4Data: [data4.photoNgtypeOne, data4.photoNgtypeTwo, data4.photoNgtypeThree, data4.photoNgtypeFour],
+                chart5Data: [data5.photoNgtypeOne, data5.photoNgtypeTwo, data5.photoNgtypeThree, data5.photoNgtypeFour],
+            });
+        };
+
+        fetchAllData();
+    }, []);
+
     useEffect(() => {
         const charts = {};
 
         Object.entries(chartRefs).forEach(([key, ref], index) => {
-            if (ref.current) {
+            if (ref.current && cameraData[`chart${index + 1}Data`].length > 0) {
                 charts[key] = echarts.init(ref.current);
-                charts[key].setOption(getChartOption(generateData(), titleTexts[index]));
+                charts[key].setOption(getChartOption(cameraData[`chart${index + 1}Data`], titleTexts[index]));
             }
         });
 
         const handleResize = () => {
             Object.values(charts).forEach(chart => chart.resize());
         };
+
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
             Object.values(charts).forEach(chart => chart.dispose());
         };
-    }, []);
+    }, [cameraData]); // cameraData가 변경될 때마다 차트 업데이트
 
     return (
         <div className="graphs-container">

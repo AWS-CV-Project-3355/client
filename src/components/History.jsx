@@ -1,61 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/css/History.css';
-import testImg from '../assets/img/test_img.png';
+import axios from 'axios';
 
 const History = ({ onItemClick, selectedItem }) => {
-    const [uploadHistory, setUploadHistory] = useState([
-        {
-            id: 1,
-            objectName: "20231013-20244012",
-            date: "2023-10-13 20:24:12",
-            cameras: [
-                { image: testImg, cropImage: testImg, type: 0, description: "1뜯김" },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-            ],
-        },
-        {
-            id: 2,
-            objectName: "20231014-12345678",
-            date: "2023-10-14 12:34:56",
-            cameras: [
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: testImg, type: 0, description: "2오염" },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-            ],
-        },
-        {
-            id: 3,
-            objectName: "20231014-12345678",
-            date: "2023-10-14 12:34:56",
-            cameras: [
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: testImg, type: 0, description: "3오염" },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-            ],
-        },
-        {
-            id: 4,
-            objectName: "20231014-12345678",
-            date: "2023-10-14 12:34:56",
-            cameras: [
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-                { image: testImg, cropImage: null, type: 1, description: null },
-            ],
-        },
-    ]);
-
-
+    const [uploadHistory, setUploadHistory] = useState([]);
     const [showNgOnly, setShowNgOnly] = useState(false);
+
+    // 데이터 불러오기
+    useEffect(() => {
+        const fetchHistory = async () => {
+            try {
+                const response = await axios.get('http://18.205.110.55:8080/diecast/list');
+                if (response.status === 200) {
+                    const fetchedData = response.data.diecastList.map((item) => ({
+                        id: item.diecastUuid,
+                        objectName: `Object-${item.diecastUuid}`, // 오브젝트 이름 임시 설정
+                        date: new Date(item.createdAt).toLocaleString(), // 날짜 포맷
+                        cameras: [
+                            {
+                                type: item.diecastOkng, // 0: NG, 1: OK
+                                description: item.diecastOkng === 0 ? 'NG' : 'OK',
+                                image: null, // 이미지 설정 필요시 추가
+                                cropImage: null,
+                            },
+                        ],
+                    }));
+                    setUploadHistory(fetchedData);
+                } else {
+                    console.error('Failed to fetch history:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching history:', error);
+            }
+        };
+
+        fetchHistory();
+    }, []);
 
     // 필터링된 데이터
     const filteredHistory = showNgOnly
