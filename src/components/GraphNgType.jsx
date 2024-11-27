@@ -1,8 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 
 const GraphNgTypes = () => {
     const chartRef = useRef(null);
+    const [data, setData] = useState({
+        photoNgtypeOne: 0,
+        photoNgtypeTwo: 0,
+        photoNgtypeThree: 0,
+        photoNgtypeFour: 0,
+    });
 
     // 각 라벨에 대한 색상 정의
     const labelColors = {
@@ -12,7 +18,23 @@ const GraphNgTypes = () => {
         '유로홀버': '#ff6c6c'
     };
 
+    // 데이터 API 호출
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://18.205.110.55:8080/photo/graph/ng/type');
+                const result = await response.json();
+                setData(result); // 받아온 데이터로 state 업데이트
+            } catch (error) {
+                console.error('데이터를 불러오는 데 실패했습니다:', error);
+            }
+        };
+
+        fetchData();
+    }, []); // 컴포넌트가 처음 렌더링될 때만 호출
+
+    useEffect(() => {
+        // ECharts 인스턴스 생성
         const chart = echarts.init(chartRef.current);
 
         const options = {
@@ -38,13 +60,13 @@ const GraphNgTypes = () => {
             },
             xAxis: {
                 type: 'category',
-                data: ['뜯김', '미성형', '찍힘', '유로홀버'],
+                data: ['뜯김', '미성형', '찍힘', '유로홀버'], // X축 라벨
                 axisTick: {
                     alignWithLabel: false,
                 },
                 axisLabel: {
                     interval: 0,
-                    rotate: 30
+                    rotate: 30,
                 }
             },
             yAxis: {
@@ -53,7 +75,12 @@ const GraphNgTypes = () => {
             series: [
                 {
                     type: 'bar',
-                    data: [152, 210, 120, 59],
+                    data: [
+                        data.photoNgtypeOne,
+                        data.photoNgtypeTwo,
+                        data.photoNgtypeThree,
+                        data.photoNgtypeFour,
+                    ], // 받아온 데이터 사용
                     barWidth: '60%', // 막대 너비
                     itemStyle: {
                         // 각 x축 라벨에 맞는 색상 설정
@@ -73,10 +100,11 @@ const GraphNgTypes = () => {
 
         chart.setOption(options);
 
+        // 컴포넌트가 언마운트될 때 차트 인스턴스 해제
         return () => {
             chart.dispose();
         };
-    }, []);
+    }, [data]); // 데이터가 변경될 때마다 차트 갱신
 
     return (
         <div style={{ width: '100%', height: '180px', margin: '4px 4px' }}>
