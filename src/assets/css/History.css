@@ -57,7 +57,8 @@
 }
 
 .object-ng-only {
-    padding-right: 8px;
+    margin-right: 8px;
+    margin-left: 16px;
 }
 
 .history-ng-section {

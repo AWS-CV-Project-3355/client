@@ -4,6 +4,7 @@ import './App.css';
 import Layout from './components/Layout';
 import History from './components/History';
 import Graph from './components/Graph';
+import NGDetail from './components/NGDetail';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
-    localStorage.removeItem('uploadedVideo');
+    // localStorage.removeItem('uploadedVideo');
   };
 
   const handleBackToList = () => {
