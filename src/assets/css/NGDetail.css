@@ -1,43 +1,73 @@
+/* NGDetail.css */
 .ng-detail {
-    padding: 16px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
+    padding: 20px;
+    text-align: center;
 }
 
 .back-button {
-    display: inline-block;
-    margin-bottom: 16px;
-    padding: 8px 16px;
-    background-color: #1a73e8;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 14px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .back-button:hover {
-    background-color: #155cb0;
+    background-color: #0056b3;
 }
 
 .ng-images-list {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
+    margin-top: 20px;
 }
 
-.ng-cropimage,
-.ng-image {
-    display: block;
-    height: 200px;
-    flex: 1;
-    object-fit: scale-down;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 0 0;
-    margin: 0 0;
+.ng-cropimage {
+    max-width: 100%;
+    max-height: 330px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+/* 모달 내용 */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}
+
+/* 모달 이미지 */
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    margin: 10px 0;
 }

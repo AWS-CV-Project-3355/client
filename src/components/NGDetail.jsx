@@ -1,23 +1,17 @@
 import React from "react";
 import '../assets/css/NGDetail.css';
+import yolo from '../assets/img/yolo.png';
 
-const NGDetail = ({ item, onBack }) => {
-    if (!item) {
-        return <div className="ng-detail">Item not found</div>;
-    }
-
+const NGDetail = ({ onBack }) => {
     return (
         <div className="ng-detail">
             <button className="back-button" onClick={onBack}>Back</button>
-            <h2>NG Detail</h2>
             <div className="ng-images-list">
-                <img src={item.image} alt="NG 부품 사진" className="ng-image" />
-                <img src={item.cropimage} alt="결함 위치 Crop" className="ng-cropimage" />
+                <img src={yolo} alt="결함 위치" className="ng-cropimage" />
             </div>
             <h3>결함 안내</h3>
-            <p>Status: {item.status}</p>
-            <p>Camera: {item.camera}</p>
-            <p>Description: {item.description}</p>
+            <p>Camera: 3번 카메라</p>
+            <p>Description: NG 찍힘</p>
         </div>
     );
 };

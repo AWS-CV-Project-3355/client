@@ -19,7 +19,7 @@ const History = ({ onItemClick, selectedItem }) => {
                         cameras: [
                             {
                                 type: item.diecastOkng, // 0: NG, 1: OK
-                                description: item.diecastOkng === 0 ? 'NG' : 'OK',
+                                description: item.diecastOkng === 1 ? 'NG' : 'OK',
                                 image: null, // 이미지 설정 필요시 추가
                                 cropImage: null,
                             },
@@ -84,12 +84,12 @@ const History = ({ onItemClick, selectedItem }) => {
 
                             {/* NG/OK 상태 출력 */}
                             <span
-                                className={`history-item-type ${item.cameras.some((camera) => camera.type === 0)
+                                className={`history-item-type ${item.cameras.some((camera) => camera.type === 1)
                                     ? 'ng'
                                     : 'ok'
                                     }`}
                             >
-                                {item.cameras.some((camera) => camera.type === 0)
+                                {item.cameras.some((camera) => camera.type === 1)
                                     ? 'NG'
                                     : 'OK'}
                             </span>
